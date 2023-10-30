@@ -1,6 +1,7 @@
 package com.example.recyclerview_1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -24,5 +25,14 @@ public class MainActivity extends AppCompatActivity {
                 "Coronavirus", "Life is coronavirus!"));
         recyclerViewItems.add(new RecyclerViewItem(R.drawable.baseline_emoji_nature_24,
                 "Bee", "Life is bee!"));
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        adapter = new RecyclerViewAdapter(recyclerViewItems);
+        layoutManager = new LinearLayoutManager(this);
+
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager);
+
     }
 }

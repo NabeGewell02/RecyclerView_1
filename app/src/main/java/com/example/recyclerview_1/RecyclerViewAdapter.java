@@ -10,9 +10,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewViewHolder> {
 
+    private ArrayList<RecyclerViewItem> arrayList;
+    RecyclerViewViewHolder recyclerViewViewHolder;
+
     public static class RecyclerViewViewHolder extends RecyclerView.ViewHolder {
+
 
         public ImageView imageView;
         public TextView textView1;
@@ -27,21 +33,32 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
+    public RecyclerViewAdapter(ArrayList<RecyclerViewItem> arrayList) {
+
+        this.arrayList = arrayList;
+
+    }
+
     @NonNull
     @Override
     public RecyclerViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item, parent, false);
-        RecyclerViewViewHolder recyclerViewViewHolder = new RecyclerViewViewHolder(view);
+        recyclerViewViewHolder = new RecyclerViewViewHolder(view);
         return recyclerViewViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewViewHolder holder, int position) {
 
+        RecyclerViewItem recyclerViewItem = arrayList.get(position);
+        recyclerViewViewHolder.imageView.setImageResource(recyclerViewItem.getImageResource());
+        recyclerViewViewHolder.textView1.setText(recyclerViewItem.getText1());
+        recyclerViewViewHolder.textView2.setText(recyclerViewItem.getText2());
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return arrayList.size();
     }
 }
